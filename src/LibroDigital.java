@@ -1,34 +1,32 @@
 public class LibroDigital extends Libro {
-    private double tamanoMB;
-    private boolean disponible;
-    public void registrar(String titulo, String autor, double precio, double tamanoMB, boolean disponible) {
-        this.titulo = titulo;
-        this.autor = autor;
-        this.precio = precio;
-        this.tamanoMB = tamanoMB;
+    double tamano;
+    boolean disponible;
+    public LibroDigital(String codigo, String titulo, String autor, double precio, int cantidad, double tamano, boolean disponible) {
+        super(codigo, titulo, autor, precio, cantidad);
+        this.tamano = tamano;
         this.disponible = disponible;
-        this.cantidadEjemplares = 1000000;
     }
-    @Override
     public void mostrarLibro() {
         super.mostrarLibro();
-        System.out.println("Tamaño (MB): " + tamanoMB);
+        System.out.println("Tamaño del archivo: " + tamano + " MB");
         System.out.println("Disponible: " + (disponible ? "Sí" : "No"));
     }
     public void prestar() {
-        if (disponible) {
-            disponible = false;
-            System.out.println("Libro digital prestado correctamente.");
+        if (!disponible) {
+            System.out.println("El libro no está disponible para préstamo.");
+        } else if (cantidad <= 0) {
+            System.out.println("No hay copias disponibles para préstamo.");
         } else {
-            System.out.println(" No se puede prestar, el libro no está disponible.");
+            cantidad--;
+            System.out.println("Libro prestado correctamente.");
         }
     }
     public void devolver() {
-        if (!disponible) {
-            disponible = true;
-            System.out.println("Libro digital devuelto correctamente.");
+        if (cantidad >= 2) {
+            System.out.println("No se pueden devolver más de 2 libros.");
         } else {
-            System.out.println("No se puede devolver, el libro ya estaba disponible.");
+            cantidad++;
+            System.out.println("Libro devuelto correctamente.");
         }
     }
 }

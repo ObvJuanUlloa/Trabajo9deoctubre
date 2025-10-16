@@ -1,36 +1,27 @@
 public class LibroImpreso extends Libro {
-    private double peso;
-    private int numeroEjemplares;
-    public void registrar(String titulo, String autor, double precio, double peso, int numeroEjemplares) {
-        this.titulo = titulo;
-        this.autor = autor;
-        this.precio = precio;
+    double peso;
+    public LibroImpreso(String codigo, String titulo, String autor, double precio, int cantidad, double peso) {
+        super(codigo, titulo, autor, precio, cantidad);
         this.peso = peso;
-        this.numeroEjemplares = numeroEjemplares;
-        this.cantidadEjemplares = numeroEjemplares;
     }
-    @Override
     public void mostrarLibro() {
         super.mostrarLibro();
-        System.out.println("Peso: " + peso + " kg");
-        System.out.println("Número de ejemplares: " + numeroEjemplares);
+        System.out.println("Peso: " + peso + " gr");
     }
-    public void prestar(int cantidad) {
+    public void prestar() {
         if (cantidad <= 0) {
-            System.out.println("La cantidad debe ser mayor que 0.");
-        } else if (cantidad > cantidadEjemplares) {
-            System.out.println("No hay suficientes ejemplares disponibles.");
+            System.out.println("No hay ejemplares disponibles para préstamo.");
         } else {
-            cantidadEjemplares -= cantidad;
-            System.out.println("Se han prestado " + cantidad + " ejemplares.");
+            cantidad--;
+            System.out.println("Libro prestado correctamente.");
         }
     }
-    public void devolver(int cantidad) {
-        if (cantidad > 2) {
-            System.out.println("No se pueden devolver más de 2 libros a la vez.");
+    public void devolver() {
+        if (cantidad >= 2) {
+            System.out.println("No se pueden devolver más de 2 libros.");
         } else {
-            cantidadEjemplares += cantidad;
-            System.out.println("Se han devuelto " + cantidad + " ejemplares.");
+            cantidad++;
+            System.out.println("Libro devuelto correctamente.");
         }
     }
 }
